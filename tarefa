@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+import sys, os, requests
+
+SERVERADDR = os.environ.get("SERVERADDR")
+
+comando = sys.argv[1]
+
+if comando == "adicionar":
+	titulo = sys.argv[2]
+	texto = sys.argv[3]
+	dados = {"titulo": titulo, "texto": texto}
+	r = requests.post(os.environ['SERVERADDR'] + '/Tarefa', json = dados)
+	print(r.text)
+
+elif comando == "listar":
+	r = requests.get(os.environ['SERVERADDR'] + '/Tarefa')
+	print(r.text)
+
+elif comando == "buscar":
+	id_tarefa = sys.argv[2]
+	r = requests.get(os.environ['SERVERADDR'] + '/Tarefa/' + id_tarefa)
+	print(r.text)
+
+elif comando == "apagar":
+	id_tarefa = sys.argv[2]
+	r = requests.delete(os.environ['SERVERADDR'] + '/Tarefa/' + id_tarefa)
+	print(r.text)
+
+elif comando == "atualizar":
+	id_tarefa = sys.argv[2]
+	titulo = sys.argv[3]
+	texto = sys.argv[4]
+	dados = {"titulo": titulo, "texto": texto}
+	r = requests.put(os.environ['SERVERADDR'] + '/Tarefa/' + id_tarefa, json = dados)
+	print(r.text)
+
+elif(comando == "--help"):
+    print("""
+        adicionar [titulo] [corpo] : adiciona uma tarefa ao JSON
+        listar : mostra todas as tarefas
+        buscar [id] : mostra uma tarefa específica por id
+        apagar [id] : apaga uma tarefa por id
+        atualizar [id] [titulo] [corpo] : muda os atributos de uma tarefa por id
+    """)
