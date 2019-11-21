@@ -3,4 +3,5 @@ sudo apt update -y;
 sudo apt install python3-pip -y;
 pip3 install Flask;
 pip3 install flask_restful;
-# ./Service-REST/init.d/webserver.py start
+./Service-REST/init.d/webserver.py start
+
