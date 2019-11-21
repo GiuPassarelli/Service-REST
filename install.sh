@@ -1,3 +1,4 @@
+tmux new-session -s tmux_section -n tmux_window
 sudo apt update -y
 sudo apt install python3-pip -y
 pip3 install Flask
