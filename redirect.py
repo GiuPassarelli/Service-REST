@@ -37,9 +37,9 @@ def get_tarefas():
     res = requests.get('http://%s:%s/albums/_all_docs' % (ip,porta))
     res = res.json()
     new_json = {}
-    for i in res:
+    ffor i in res["rows"]:
         print(i)
-        res2 = requests.get('http://%s:%s/albums/_all_docs/%s' % (ip,porta,i.get("id")))
+        res2 = requests.get('http://%s:%s/albums/_all_docs/%d' % (ip,porta,i["id"]))
         temp_dict = res2.json()
         del temp_dict["_id"]
         del temp_dict["_rev"]
