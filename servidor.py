@@ -14,29 +14,29 @@ porta = '5000'
 def Healthcheck():
     return '', 200
 
-@app.route('/Tarefa', methods=['GET'])
+@app.route('/albums', methods=['GET'])
 def get_tarefas():
     res = requests.get('http://%s:%s/albums' % (ip,porta))
     return res.json()
 
-@app.route('/Tarefa', methods=['POST'])
+@app.route('/albums', methods=['POST'])
 def post_tarefas():
     new_tarefa = request.form.to_dict(flat=False)
     res = requests.put('http://%s:%s@%s:%s/albums' % (username, senha, ip, porta), json=new_tarefa)
     return res.json(), 201
 
-@app.route('/Tarefa/<int:id>', methods=['GET'])
+@app.route('/albums/<int:id>', methods=['GET'])
 def get_tarefa():
     res = requests.get('http://%s:%s/albums/%s' % (ip,porta,id))
     return res.json()
 
-@app.route('/Tarefa/<int:id>', methods=['PUT'])
+@app.route('/albums/<int:id>', methods=['PUT'])
 def put_tarefa():
     new_tarefa = request.form.to_dict(flat=False)
     res = requests.put('http://%s:%s@%s:%s/albums/%s' % (username,senha,ip,porta,id), json=new_tarefa)
     return res.json(), 201
 
-@app.route('/Tarefa/<int:id>', methods=['DELETE'])
+@app.route('/albums/<int:id>', methods=['DELETE'])
 def del_tarefa():
     res = requests.delete('http://%s:%s@%s:%s/albums/%s' % (username,senha,ip,porta,id))
     return res.json(), 204
